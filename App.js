@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import mist from "react-native-mist-library";
+import { WishApp } from "react-native-mist-library";
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -17,16 +18,18 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {
-  list: Array<{ alias: string, uid: Buffer }>
-};
+type Props = {};
 
-export default class App extends Component<Props> {
+type State = {
+  list: Array<{ alias: string, uid: Buffer }>
+}
+
+export default class App extends Component<Props, State> {
   state = {
     list: []
   }
 
-  componentWillMount(props) {
+  componentWillMount() {
     WishApp.request('signals', [null], (err, data) => {
       if (data[0] === 'identity') {
         mist.request('wish.identity.list', [null], (err, data) => {
