@@ -1,4 +1,4 @@
-package com.mistreactboilerplate;
+package com.mistreactnativeboilerplate;
 
 import android.app.Application;
 
