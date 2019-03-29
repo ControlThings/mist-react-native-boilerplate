@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "preinstall": "bash tools/rn-mist-preinstall.sh"
   },
   "dependencies": {
     "react": "16.4.1",
@@ -16,7 +17,8 @@
     "eslint": "5.2.0",
     "eslint-plugin-react": "7.10.0",
     "jest": "23.4.1",
-    "react-test-renderer": "16.4.1"
+    "react-test-renderer": "16.4.1",
+    "react-native-mist-library": "./dist/react-native-mist-library.tgz"
   },
   "jest": {
     "preset": "react-native"
