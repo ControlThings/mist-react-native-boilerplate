@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 RN_MIST_NAME=react-native-mist-library
 RN_MIST_VERSION=1.0.20
 PKG_SYMLINK=$RN_MIST_NAME.tgz
@@ -13,10 +12,19 @@ if [ -f dist/$PKG_SYMLINK ]; then
 fi
 
 
-echo "Please enter your ControlThings Artifactory user name"
-read "ARTIFACTORY_USER"
-echo "Please enter your ControlThings Artifactory (encrypted) password"
-read "ARTIFACTORY_PASSWORD"
+
+ARTIFACTORY_CREDENTIALS=~/.gradle/gradle.properties
+
+if [ ! -f $ARTIFACTORY_CREDENTIALS ]; then
+    echo "Please enter your ControlThings Artifactory user name"
+    read "ARTIFACTORY_USER"
+    echo "Please enter your ControlThings Artifactory (encrypted) password"
+    read "ARTIFACTORY_PASSWORD"
+else 
+    ARTIFACTORY_USER=`awk '{ split($1, elems, "="); if (elems[1] == "artifactory_username") { print elems[2] } }' $ARTIFACTORY_CREDENTIALS`
+    ARTIFACTORY_PASSWD=`awk '{ split($1, elems, "="); if (elems[1] == "artifactory_password") { print elems[2] } }' $ARTIFACTORY_CREDENTIALS`
+fi
+
 
 mkdir -p dist
 rm -f dist/$PKG_SYMLINK

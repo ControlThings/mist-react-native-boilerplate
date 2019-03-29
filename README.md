@@ -23,6 +23,17 @@ react-native-mist-library from ControlThings' Artifactory server. You
 will need to contact ControlThings Oy Ab to get the required
 credentials.
 
+The required credentials should be put into '~/.gradle/gradle.properties',
+so they are also available for Gradle (only used with Android build).
+
+```
+artifactory_username=your_username
+artifactory_password=your_password
+```
+
+Note that this only for convenience. If you skip this step, then the
+pre-install script will prompt you to input the information. However, you will still need to set up 'gradle.properties' if you plan develping for Android.
+
 3. Open the project in Android studio or Xcode, depending on platform,
    see below
 
