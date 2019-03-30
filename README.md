@@ -57,13 +57,37 @@ NOTE: The project's `package.json` currently specifies react-native `^0.56.0`, w
 ## Common to both iOS and Android
 
 5. Start react-native debugger on your desktop
-6. shake handset, select "Debug app"
+6. shake handset, select "Debug app". Sometimes the connection to rn
+   debugger does not form, and you need to re-start the app from Android
+   studio. 
 7. You can now make sandboxed, MistApi and WishApp requests:
     * `WishApp.request('identity.list', [])`
     * `MistApi.request('wish.identity.list', [])`
+    * `MistApi.request('listPeers', [])`
     * `mist.request('wish.identity.list', [null])`
+    * the array 'peers' has the current *sandbox* peer list.
 
+   Try them out in the ReactNative Debugger console! For example, if
+   MistApi listPeers returns a peer that is online, you can save the
+   array object as a global by right-clicking the object in the console,
+   the object will be named *temp1* etc.
 
+   Then you can:
+
+```js
+   MistApi.request('mist.control.read', [temp1, 'mist.name'])
+   // example return value could be:
+   mist-api2.js:125 4 "mist.control.read" "cb:" null "MistCli"
+```
+
+    What the different objects are:
+    * 'WishApi' is the interface for making requests directly to the core
+    * 'MistApi' is the interface to mist-api; 
+    * 'mist' on the other hand is the sandboxed MistApi interface,
+started by the "real" MistApi. An app using only the sandboxed interface
+can only see a subset of the peers, each peer being explicitly added to the
+sandbox, e.g. as a result of a successful commissioning. 
+    
 
 ## Working with react-native-mist-library sources
 
