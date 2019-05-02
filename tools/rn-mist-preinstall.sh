@@ -22,9 +22,8 @@ if [ ! -f $ARTIFACTORY_CREDENTIALS ]; then
     read "ARTIFACTORY_PASSWORD"
 else 
     ARTIFACTORY_USER=`awk '{ split($1, elems, "="); if (elems[1] == "artifactory_username") { print elems[2] } }' $ARTIFACTORY_CREDENTIALS`
-    ARTIFACTORY_PASSWD=`awk '{ split($1, elems, "="); if (elems[1] == "artifactory_password") { print elems[2] } }' $ARTIFACTORY_CREDENTIALS`
+    ARTIFACTORY_PASSWORD=`awk '{ split($1, elems, "="); if (elems[1] == "artifactory_password") { print elems[2] } }' $ARTIFACTORY_CREDENTIALS`
 fi
-
 
 mkdir -p dist
 rm -f dist/$PKG_SYMLINK
